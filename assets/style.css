@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 *,
 *::before,
 *::after {
@@ -13,7 +15,7 @@ body,
 }
 
 body {
-  font-family: sans-serif;
+  font-family: montserrat, sans-serif;
   background-color: #f9fbfd;
 }
 
