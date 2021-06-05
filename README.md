@@ -49,7 +49,7 @@ If a user decides that no criteria are needed, the generator will assume the pas
 - [2, 3, 2, 1]
 - [2, 3, 1, 2]
 
-If a user only specifies the length of password, without detailing the number of special and numeric characters, uppercase and lowercase letters, the program will conduct a range screening.
+If a user only specifies the length of password, without detailing the number of special and numeric characters, uppercase and lowercase letters, the program will conduct a range screening, then work on generating the password based on the range.
 
 For example, when the password length is between 8 and 16, the sequence of numbers for special character, numeric, uppercase letter are fixed as 1, 1, 2. The rest are lowercase letters. This is denoted as 'Range: 8 - 16, [1, 1, 2]'. All numbers go up proportionally. All 8 possible ranges are detailed as below:
 
