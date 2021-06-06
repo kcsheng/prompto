@@ -169,7 +169,9 @@ function writePassword() {
               break;
             case "C":
               let exitCharOption = false;
-              while (!exitCharOption) {}
+              while (!exitCharOption) {
+                var 
+              }
               break;
           }
           return "Yes you are at the right place";
