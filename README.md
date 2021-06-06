@@ -2,23 +2,23 @@
 
 ---
 
-Prompto is a password generator that runs in the client environment. It generates a password according to the criteria specified by the user.
+Prompto is a password generator that runs in the client environment. It generates a secure password according to the criteria specified by the user.
 
 Prompto's web page follows a pre-established [mockup](./assets/pw-gen.png). The final product aims to present a clean and resonsive interface to the user. In this project, javascript code is incorporated to fulfill its functionality, making use of window pop-up boxes to interact with a user.
 
 The completed project can be accessed here.
 
-### Criteria
+### Functionality
 
-- When clicking on the "generate password" button, there should be a series of prompts which direct user to specify their password criteria.
+- When user clicks on the "generate password" button, there should be a series of prompts which direct user to specify their password criteria.
 
-- The user has a choice whether to include a set of criteria (password length, character types or both) to their liking.
+- The user has a choice whether to include a set of criteria (password length, character types) to their liking.
 
 - If the password length option is chosen, the prompt will further request the length from the user, with a range between 8 and 128 characters.
 
-- If the character types option is chosen, a list of further options including lowercase, uppercase, numeric and/or special characters is presented to the user. The user has to choose at least one from those options.
+- If the character types option is chosen together with length, a list of options including lowercase, uppercase, numeric and/or special characters should be presented to the user.
 
-- After all prompts are answered, the password is generated to match all selected criteria and shown on the page.
+- After prompts are addressed, the password is generated to match corresponding criteria and is shown on the page.
 
 ### Implementation plan
 
