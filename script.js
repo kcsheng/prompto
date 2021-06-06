@@ -12,6 +12,8 @@ function writePassword() {
     var numberChars = "1234567890";
     var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+
+    // Returns a shuffled string (password in this case)
     var shufflePassword = function (password) {
       var result = "";
       for (let i = password.length - 1; i >= 0; i--) {
@@ -20,6 +22,37 @@ function writePassword() {
         result += chosenChar;
       }
       return result;
+    };
+
+    // Returns a random password by specifyng numbers of chars
+    var formulatePassword = function (
+      specialCharNum,
+      numericCharNum,
+      uppercaseCharNum,
+      lowercaseCharNum
+    ) {
+      var password = "";
+      for (let i = 0; i < specialCharNum; i++) {
+        password += specialChars.charAt(
+          Math.floor(Math.random() * specialChars.length)
+        );
+      }
+      for (let i = 0; i < numericCharNum; i++) {
+        password += numberChars.charAt(
+          Math.floor(Math.random() * numberChars.length)
+        );
+      }
+      for (let i = 0; i < uppercaseCharNum; i++) {
+        password += uppercaseChars.charAt(
+          Math.floor(Math.random() * uppercaseChars.length)
+        );
+      }
+      for (let i = 0; i < lowercaseCharNum; i++) {
+        password += lowercaseChars.charAt(
+          Math.floor(Math.random() * lowercaseChars.length)
+        );
+      }
+      return shufflePassword(password);
     };
     var generate8charPassword = function () {
       var password = "";
@@ -44,28 +77,55 @@ function writePassword() {
       var numericCharNum = targetPattern[1];
       var uppercaseCharNum = targetPattern[2];
       var lowercaseCharNum = targetPattern[3];
+      return formulatePassword(
+        specialCharNum,
+        numericCharNum,
+        uppercaseCharNum,
+        lowercaseCharNum
+      );
+    };
+
+    var generatePasswordByLength = function (length) {
       var password = "";
-      for (let i = 0; i < specialCharNum; i++) {
-        password += specialChars.charAt(
-          Math.floor(Math.random() * specialChars.length)
-        );
+      var pattern;
+      switch (true) {
+        case length <= 16:
+          // specify numbers of special, number and uppercase char
+          pattern = [1, 1, 2];
+          break;
+        case length <= 32:
+          pattern = [2, 2, 4];
+          break;
+        case length <= 48:
+          pattern = [3, 3, 6];
+          break;
+        case length <= 64:
+          pattern = [4, 4, 8];
+          break;
+        case length <= 80:
+          pattern = [5, 5, 10];
+          break;
+        case length <= 96:
+          pattern = [6, 6, 12];
+          break;
+        case length <= 112:
+          pattern = [7, 7, 14];
+          break;
+        case length <= 128:
+          pattern = [8, 8, 16];
+          break;
       }
-      for (let i = 0; i < numericCharNum; i++) {
-        password += numberChars.charAt(
-          Math.floor(Math.random() * numberChars.length)
-        );
-      }
-      for (let i = 0; i < uppercaseCharNum; i++) {
-        password += uppercaseChars.charAt(
-          Math.floor(Math.random() * uppercaseChars.length)
-        );
-      }
-      for (let i = 0; i < lowercaseCharNum; i++) {
-        password += lowercaseChars.charAt(
-          Math.floor(Math.random() * lowercaseChars.length)
-        );
-      }
-      return shufflePassword(password);
+      var specialCharNum = pattern[0];
+      var numericCharNum = pattern[1];
+      var uppercaseCharNum = pattern[2];
+      var lowercaseCharNum =
+        length - (specialCharNum + numericCharNum + uppercaseCharNum);
+      return formulatePassword(
+        specialCharNum,
+        numericCharNum,
+        uppercaseCharNum,
+        lowercaseCharNum
+      );
     };
 
     // Program starts here.
@@ -75,29 +135,52 @@ function writePassword() {
     );
 
     if (tweakPassword) {
-      let exit = false;
-      while (!exit) {
+      let exitTweakPassword = false;
+      while (!exitTweakPassword) {
         var tweakOption = window.prompt(
           "Would you like to change password length(L), character distribution(C) or both(LC)? Please key in 'L', 'C' or 'LC'."
         );
         if (tweakOption === null) {
-          window.alert(
-            "You've chosen not to proceed. An 8 character password is ready for you."
-          );
-          return shufflePassword(password);
+          window.alert("You've cancelled the operation. Please try again.");
+          return "";
         } else if (
           tweakOption == "L" ||
           tweakOption == "C" ||
           tweakOption == "LC"
         ) {
+          switch (tweakOption) {
+            case "L":
+              let exitLengthOption = false;
+              while (!exitLengthOption) {
+                var desiredLength = window.prompt(
+                  "How long would you like your password be (must be longer than 8 and shorter than 128 characters. Please key in the length in number."
+                );
+                if (desiredLength === null) {
+                  window.alert(
+                    "You've cancelled the operation. Please try again."
+                  );
+                  return "";
+                } else if (desiredLength <= 128 && desiredLength >= 8) {
+                  return generatePasswordByLength(desiredLength);
+                } else {
+                  window.alert("Invalid input!");
+                }
+              }
+              break;
+            case "C":
+              let exitCharOption = false;
+              while (!exitCharOption) {}
+              break;
+          }
           return "Yes you are at the right place";
-          exit = true;
+          exitTweakPassword = true;
         } else {
           window.alert("Invalid input!");
         }
       }
       // Default to generate 8 character password
     } else {
+      window.alert("Click OK to collect your password.");
       return generate8charPassword();
     }
   };
