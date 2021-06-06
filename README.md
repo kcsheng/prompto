@@ -4,7 +4,7 @@
 
 Prompto is a password generator that runs in the client environment. It generates a secure password according to the criteria specified by the user.
 
-Prompto's web page follows a pre-established [mockup](./assets/pw-gen.png). The final product aims to present a clean and resonsive interface to the user. In this project, javascript code is incorporated to fulfill its functionality, making use of window pop-up boxes to interact with a user.
+Prompto's web page follows a pre-established [mockup](./assets/pw-gen.png). The final product aims to present a clean and responsive interface to the user. In this project, javascript code is incorporated to fulfill its functionality, making use of window pop-up boxes to interact with a user.
 
 The completed project can be accessed here.
 
@@ -66,7 +66,7 @@ If a user specifies both the length and the numbers of special character, numeri
 
 #### Status update
 
-parseInt() introduced a subtle bug in this app earlier on. parseInt() should be used with caution when converting string number into a number datatype. It can "mistakenly" convert invalid entry that contains other character types at rear. Therefore, valid input validation needs to be in force before using parseInt function. In the example below, the data has been entered as " 24kd", which is supposed to be "24" initially. After parseInt conversion, it completely masks the invalidity of the entry.
+parseInt() introduced a subtle bug in this app earlier on. This function should be used with caution when converting string number into a number datatype. It can "mistakenly" convert invalid entry that contains other character types at rear. Therefore, valid input validation needs to be in force before using parseInt function. In the example below, the data has been entered as " 24kd", which is supposed to be "24" initially. After parseInt conversion, it completely masks the invalidity of the entry.
 
 Meanwhile, '24' is considered a legal number in javascript. Interestingly, isNaN() is highly effective in screening out an illegal number within the string.<br><br>
 ![parseInt() can mask invalid entry.](./assets/parseInt.png)
