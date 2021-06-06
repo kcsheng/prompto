@@ -66,7 +66,7 @@ If a user specifies both the length and the numbers of special character, numeri
 
 #### Status update
 
-parseInt() instroduced a subtle bug in this app earler on. parseInt() should be used with caution when converting string number into a number datatype. It can "mistakenly" convert invalid entry that contains other character types at rear. Therefore, valid input validation needs to be in force before using parseInt function. In the example below, the data has been entered as " 24kd", which is supposed to be "24" initially. After parseInt conversion, it completely masks the invalidity of the entry.
+parseInt() introduced a subtle bug in this app earlier on. parseInt() should be used with caution when converting string number into a number datatype. It can "mistakenly" convert invalid entry that contains other character types at rear. Therefore, valid input validation needs to be in force before using parseInt function. In the example below, the data has been entered as " 24kd", which is supposed to be "24" initially. After parseInt conversion, it completely masks the invalidity of the entry.
 
 Meanwhile, '24' is considered a legal number in javascript. Interestingly, isNaN() is highly effective in screening out an illegal number within the string.<br><br>
 ![parseInt() can mask invalid entry.](./assets/parseInt.png)
