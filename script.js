@@ -155,7 +155,11 @@ function writePassword() {
             if (desiredLength === null) {
               window.alert("You've cancelled the operation. Please try again.");
               return "";
-            } else if (desiredLengthInt <= 128 && desiredLengthInt >= 8) {
+            } else if (
+              desiredLengthInt <= 128 &&
+              desiredLengthInt >= 8 &&
+              !isNaN(desiredLength)
+            ) {
               if (adjustOption == "LC") {
                 let exitadjustSpecial = false;
                 while (!exitadjustSpecial) {
