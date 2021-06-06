@@ -6,7 +6,7 @@ Prompto is a password generator that runs in the client environment. It generate
 
 Prompto's web page follows a pre-established [mockup](./assets/pw-gen.png). The final product aims to present a clean and responsive interface to the user. In this project, javascript code is incorporated to fulfill its functionality, making use of window pop-up boxes to interact with a user.
 
-The completed project can be accessed here.
+The completed project can be accessed [here](https://kcsheng.github.io/prompto/).
 
 ### Functionality
 
