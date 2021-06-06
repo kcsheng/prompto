@@ -148,7 +148,7 @@ function writePassword() {
           // Loop to catch invalid input
           while (!exitLengthOption) {
             var desiredLength = window.prompt(
-              "How long would you like your password be? Your passwaord must be longer than 8 (inclusive) and shorter than 128 (inclusive) characters. Please key in the length in number."
+              "How long would you like your password to be? Your passwaord must be longer than 8 (inclusive) and shorter than 128 (inclusive) characters. Please key in the length in number."
             );
             // Convert number in string to integer
             var desiredLengthInt = parseInt(desiredLength);
