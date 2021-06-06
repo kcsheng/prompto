@@ -54,9 +54,9 @@ function writePassword() {
       }
       return shufflePassword(password);
     };
+
+    // Generate 8 character password through pre-determined patterns
     var generate8charPassword = function () {
-      var password = "";
-      // Numbers of special character, numeric, uppercase, lowercase
       var patternCollection = [
         [1, 1, 4, 2],
         [1, 1, 2, 4],
@@ -69,7 +69,6 @@ function writePassword() {
         [2, 3, 2, 1],
         [2, 3, 1, 2],
       ];
-      // Choose a pattern
       var totalPatternNum = patternCollection.length;
       var targetPatternIndex = Math.floor(Math.random() * totalPatternNum);
       var targetPattern = patternCollection[targetPatternIndex];
@@ -85,6 +84,7 @@ function writePassword() {
       );
     };
 
+    // Generate password through pre-determined pattern proportional to length range
     var generatePasswordByLength = function (length) {
       var password = "";
       var pattern;
@@ -130,52 +130,121 @@ function writePassword() {
 
     // Program starts here.
 
-    var tweakPassword = window.confirm(
-      "Would you like to manually tweak your password?"
+    var adjustPassword = window.confirm(
+      "Would you like to manually adjust your password?"
     );
 
-    if (tweakPassword) {
-      let exitTweakPassword = false;
-      while (!exitTweakPassword) {
-        var tweakOption = window.prompt(
-          "Would you like to change password length(L), character distribution(C) or both(LC)? Please key in 'L', 'C' or 'LC'."
+    if (adjustPassword) {
+      let exitadjustPassword = false;
+      while (!exitadjustPassword) {
+        var adjustOption = window.prompt(
+          "Would you like to change password length(L) or length together with characters (LC)? Please key in 'L' or 'LC'."
         );
-        if (tweakOption === null) {
+        if (adjustOption === null) {
           window.alert("You've cancelled the operation. Please try again.");
           return "";
-        } else if (
-          tweakOption == "L" ||
-          tweakOption == "C" ||
-          tweakOption == "LC"
-        ) {
-          switch (tweakOption) {
-            case "L":
-              let exitLengthOption = false;
-              while (!exitLengthOption) {
-                var desiredLength = window.prompt(
-                  "How long would you like your password be (must be longer than 8 and shorter than 128 characters. Please key in the length in number."
-                );
-                if (desiredLength === null) {
-                  window.alert(
-                    "You've cancelled the operation. Please try again."
+        } else if (adjustOption == "L" || adjustOption == "LC") {
+          let exitLengthOption = false;
+          // Loop to catch invalid input
+          while (!exitLengthOption) {
+            var desiredLength = window.prompt(
+              "How long would you like your password be? Your passwaord must be longer than 8 (inclusive) and shorter than 128 (inclusive) characters. Please key in the length in number."
+            );
+            // Convert number in string to integer
+            var desiredLengthInt = parseInt(desiredLength);
+            if (desiredLength === null) {
+              window.alert("You've cancelled the operation. Please try again.");
+              return "";
+            } else if (desiredLengthInt <= 128 && desiredLengthInt >= 8) {
+              if (adjustOption == "LC") {
+                let exitadjustSpecial = false;
+                while (!exitadjustSpecial) {
+                  var desiredSpecial = window.prompt(
+                    `Specify how many special characters you desire in your password. Remember your password length was set to ${desiredLength} earlier.`
                   );
-                  return "";
-                } else if (desiredLength <= 128 && desiredLength >= 8) {
-                  return generatePasswordByLength(desiredLength);
-                } else {
-                  window.alert("Invalid input!");
+                  var desiredSpecialInt = parseInt(desiredSpecial);
+                  if (desiredSpecial === null) {
+                    window.alert(
+                      "You've cancelled the operation. Please try again."
+                    );
+                    return "";
+                  } else if (
+                    // The biggest number should still leave 3 to accommondate the rest.
+                    desiredSpecialInt >= 1 &&
+                    desiredSpecialInt < desiredLengthInt - 3
+                  ) {
+                    let exitadjustNumeric = false;
+                    while (!exitadjustNumeric) {
+                      var desiredNumeric = window.prompt(
+                        `Specify how many numeric characters you desire. Remember your password length was set to ${desiredLength} earlier and you have set ${desiredSpecial} special characters.`
+                      );
+                      var desiredNumericInt = parseInt(desiredNumeric);
+                      if (desiredNumeric === null) {
+                        window.alert(
+                          "You've cancelled the operation. Please try again."
+                        );
+                        return "";
+                      } else if (
+                        // The biggest number should still leave 2 to accommondate the rest.
+                        desiredNumericInt >= 1 &&
+                        desiredNumericInt <
+                          desiredLengthInt - desiredSpecialInt - 2
+                      ) {
+                        let exitadjustUppercase = false;
+                        while (!exitadjustUppercase) {
+                          var desiredUppercase = window.prompt(
+                            `Specify how many uppercase characters you desire. Remember your password length was set to ${desiredLength} earlier. You have also set ${desiredSpecial} special characters and ${desiredNumeric} numeric characters.`
+                          );
+                          var desiredUppercaseInt = parseInt(desiredUppercase);
+                          if (desiredUppercase === null) {
+                            window.alert(
+                              "You've cancelled the operation. Please try again."
+                            );
+                          } else if (
+                            // The biggest number should still leave 1 for the lowercase.
+                            desiredUppercaseInt >= 1 &&
+                            desiredUppercaseInt <
+                              desiredLengthInt -
+                                desiredSpecialInt -
+                                desiredNumericInt -
+                                1
+                          ) {
+                            window.alert(
+                              "Your password is ready. Click OK to collect."
+                            );
+                            var specialCharNum = desiredSpecialInt;
+                            var numericCharNum = desiredNumericInt;
+                            var uppercaseCharNum = desiredUppercaseInt;
+                            var lowercaseCharNum =
+                              desiredLengthInt -
+                              (specialCharNum +
+                                numericCharNum +
+                                uppercaseCharNum);
+                            return formulatePassword(
+                              specialCharNum,
+                              numericCharNum,
+                              uppercaseCharNum,
+                              lowercaseCharNum
+                            );
+                          } else {
+                            window.alert("Invalid input!");
+                          }
+                        }
+                      } else {
+                        window.alert("Invalid input!");
+                      }
+                    }
+                  } else {
+                    window.alert("Invalid input!");
+                  }
                 }
               }
-              break;
-            case "C":
-              let exitCharOption = false;
-              while (!exitCharOption) {
-                var 
-              }
-              break;
+              window.alert("You password is ready. Click OK to collect it.");
+              return generatePasswordByLength(desiredLength);
+            } else {
+              window.alert("Invalid input!");
+            }
           }
-          return "Yes you are at the right place";
-          exitTweakPassword = true;
         } else {
           window.alert("Invalid input!");
         }
