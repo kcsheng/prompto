@@ -23,7 +23,7 @@ The completed project can be accessed here.
 ### Implementation plan
 
 Flowchart:<br>
-![program flow of Prompto password generator](./assets/flowchart.png)
+![program flow of Prompto password generator](./assets/flow-chart.png)
 
 #### Password design principle
 
