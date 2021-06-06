@@ -158,13 +158,13 @@ function writePassword() {
             } else if (
               desiredLengthInt <= 128 &&
               desiredLengthInt >= 8 &&
-              !isNaN(desiredLength)
+              !isNaN(desiredLength) // Filter out NaN such as " 12 nj" as input
             ) {
               if (adjustOption == "LC") {
                 let exitadjustSpecial = false;
                 while (!exitadjustSpecial) {
                   var desiredSpecial = window.prompt(
-                    `Specify how many special characters you desire in your password. Remember your password length was set to ${desiredLength} earlier.`
+                    `Specify how many special characters you desire in your password. Remember your password length was set to ${desiredLengthInt} earlier.`
                   );
                   var desiredSpecialInt = parseInt(desiredSpecial);
                   if (desiredSpecial === null) {
@@ -175,12 +175,13 @@ function writePassword() {
                   } else if (
                     // The biggest number should still leave 3 to accommondate the rest.
                     desiredSpecialInt >= 1 &&
-                    desiredSpecialInt < desiredLengthInt - 3
+                    desiredSpecialInt < desiredLengthInt - 3 &&
+                    !isNaN(desiredSpecial)
                   ) {
                     let exitadjustNumeric = false;
                     while (!exitadjustNumeric) {
                       var desiredNumeric = window.prompt(
-                        `Specify how many numeric characters you desire. Remember your password length was set to ${desiredLength} earlier and you have set ${desiredSpecial} special characters.`
+                        `Specify how many numeric characters you desire. Remember your password length was set to ${desiredLengthInt} earlier and you have set ${desiredSpecialInt} special characters.`
                       );
                       var desiredNumericInt = parseInt(desiredNumeric);
                       if (desiredNumeric === null) {
@@ -192,12 +193,13 @@ function writePassword() {
                         // The biggest number should still leave 2 to accommondate the rest.
                         desiredNumericInt >= 1 &&
                         desiredNumericInt <
-                          desiredLengthInt - desiredSpecialInt - 2
+                          desiredLengthInt - desiredSpecialInt - 2 &&
+                        !isNaN(desiredNumeric)
                       ) {
                         let exitadjustUppercase = false;
                         while (!exitadjustUppercase) {
                           var desiredUppercase = window.prompt(
-                            `Specify how many uppercase characters you desire. Remember your password length was set to ${desiredLength} earlier. You have also set ${desiredSpecial} special characters and ${desiredNumeric} numeric characters.`
+                            `Specify how many uppercase characters you desire. Remember your password length was set to ${desiredLengthInt} earlier. You have also set ${desiredSpecialInt} special characters and ${desiredNumericInt} numeric characters.`
                           );
                           var desiredUppercaseInt = parseInt(desiredUppercase);
                           if (desiredUppercase === null) {
@@ -211,7 +213,8 @@ function writePassword() {
                               desiredLengthInt -
                                 desiredSpecialInt -
                                 desiredNumericInt -
-                                1
+                                1 &&
+                            !isNaN(desiredUppercase)
                           ) {
                             window.alert(
                               "Your password is ready. Click OK to collect."
